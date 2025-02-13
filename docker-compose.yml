@@ -1,0 +1,39 @@
+services:
+  react-app:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    stdin_open: true
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  api-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    image: mongo:7.0.16-jammy
+    command: mongod --port 1521
+    ports: 
+      - "1521:1521"
+    networks:
+      - app-network
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
