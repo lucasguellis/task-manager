@@ -1,5 +1,7 @@
 # Task Manager - Aplicação para Controle de Tarefas
 
+![Login Page](./client/public/loginpage.png)
+
 ## Descrição do Projeto
 
 Este projeto consiste em uma aplicação web fullstack para gerenciamento de tarefas. Os usuários podem criar, visualizar, editar e excluir tarefas, utilizando autenticação baseada em JWT. A aplicação é composta por um front-end em React, um back-end em Node.js com Express e um banco de dados MongoDB gerenciado via Mongoose.
