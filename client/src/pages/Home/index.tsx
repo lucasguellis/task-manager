@@ -38,9 +38,6 @@ const HomePage: React.FC = () => {
     });
   };
 
-  const handleDeleteButtonClick = () => {
-  }
-
   useEffect(() => {
     if (data) {
       let filteredData = data;
@@ -83,7 +80,7 @@ const HomePage: React.FC = () => {
             <h3 className="text-2xl font-bold">Tarefas</h3>
             <div className='text-center'>
               <p className="text-sm text-gray-500">Status</p>
-              <select className="bg-gray-300/90 rounded-sm" onChange={handleFilterByChange}>
+              <select className="bg-gray-300/90 rounded-sm" onChange={handleFilterByChange} value={searchParams.get('filterBy') || ''}>
                 <option value="all">Todos</option>
                 <option value={Status.PENDING}>{getStatusLabel(Status.PENDING)}</option>
                 <option value={Status.DOING}>{getStatusLabel(Status.DOING)}</option>
@@ -92,7 +89,8 @@ const HomePage: React.FC = () => {
             </div>
             <div className='text-center'>
               <p className="text-sm text-gray-500">Ordenar por</p>
-              <select className="bg-gray-300/90 rounded-sm" onChange={handleOrderByChange}>
+              <select className="bg-gray-300/90 rounded-sm" onChange={handleOrderByChange} value={searchParams.get('orderBy') || ''}>
+                <option value={0} disabled={true} selected={true} hidden={true}>Selecione...</option>
                 <option value="name|asc">Título ↑</option>
                 <option value="name|desc">Título ↓</option>
                 <option value="dueDate|asc">Vencimento ↑</option>
@@ -100,7 +98,7 @@ const HomePage: React.FC = () => {
               </select>
             </div>
             <Button
-              label="Adicionar tarefa"
+                label="Adicionar tarefa"
               onClick={() => setIsCreateTaskModalOpen(true)}
               className={ButtonStyles.primary}
             />
