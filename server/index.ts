@@ -1,7 +1,10 @@
 import express, { Request, Response, Express } from 'express';
 import http from 'http';
 
-import db, { closeDatabase } from './db/index';
+import db from './db/index';
+import tasks from './routes/tasks';
+import users from './routes/users';
+import auth from './routes/auth';
 
 import { corsHandler } from './middlewares/cors';
 import { loggingHandler } from './middlewares/logging';
@@ -21,6 +24,10 @@ export const Main = () => {
   }
 
   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+  app.use('/api', tasks);
+  app.use('/api', users);
+  app.use('/', auth);
 
   app.get('/', (req: Request, res: Response) => {
     return res.status(200).json({ success: true });
